@@ -1,0 +1,28 @@
+
+    #map {
+    position: absolute;
+    top: 0;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+}
+
+    /*leaf dots style*/
+.blueIcon{
+    background-color: deepskyblue;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.5);
+}
+
+.greenIcon{
+    background-color: greenyellow;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.5);
+}
+
+.goals{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+}

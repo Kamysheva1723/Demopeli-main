@@ -1,0 +1,277 @@
+{
+  "status": {
+    "id": "8UdJb2gimIHPpkGaP6hT",
+    "name": "Test Player",
+    "visited_location": {
+      "Asia": false,
+      "Europa": false,
+      "Afrika": false,
+      "NAmerika": false,
+      "EAmerika": false,
+      "Australia": false,
+      "Antarktida": false
+    }
+  },
+  "location": [
+    {
+      "ident": "EFHK",
+      "visited": true,
+      "active": true,
+      "name": "Helsinki Vantaa Airport",
+      "latitude": 60.3172,
+      "longitude": 24.963301,
+      "weather": {
+        "main": "Clear",
+        "description": "clear sky",
+        "icon": "https://openweathermap.org/img/wn/01n.png",
+        "temp": 9,
+        "humidity": 86,
+        "wind": {
+          "speed": 1.03,
+          "deg": 80
+        },
+        "meets_goals": [6]
+      }
+    },
+    {
+      "ident": "EE-0002",
+      "active": false,
+      "visited": true,
+      "name": "Haapsalu Air Base",
+      "latitude": 58.911098,
+      "longitude": 23.488899,
+      "distance": 177,
+      "co2_consumption": 227
+    },
+    {
+      "ident": "EE-0004",
+      "active": false,
+      "visited": true,
+      "name": "J\u00e4gala Highway Strip",
+      "latitude": 59.397778,
+      "longitude": 25.290556,
+      "distance": 104,
+      "co2_consumption": 154
+    },
+    {
+      "ident": "EE-0008",
+      "active": false,
+      "visited": true,
+      "name": "Tallinn Lasnam\u00e4e Airfield",
+      "latitude": 59.45,
+      "longitude": 24.86333,
+      "distance": 96,
+      "co2_consumption": 146
+    },
+    {
+      "ident": "EE-0009",
+      "active": false,
+      "visited": true,
+      "name": "Avaste Airfield",
+      "latitude": 58.707634,
+      "longitude": 24.221667,
+      "distance": 184,
+      "co2_consumption": 234
+    },
+    {
+      "ident": "EE-1612",
+      "active": false,
+      "visited": true,
+      "name": "Vohma Air Base",
+      "latitude": 58.66220092773438,
+      "longitude": 25.58670043945313,
+      "distance": 187,
+      "co2_consumption": 237
+    },
+    {
+      "ident": "EE-9278",
+      "active": false,
+      "visited": true,
+      "name": "Kunda Air Base",
+      "latitude": 59.53670120239258,
+      "longitude": 26.31170082092285,
+      "distance": 115,
+      "co2_consumption": 165
+    },
+    {
+      "ident": "EECL",
+      "active": false,
+      "visited": true,
+      "name": "Tallinn Linnahall Heliport",
+      "latitude": 59.448015,
+      "longitude": 24.753313,
+      "distance": 97,
+      "co2_consumption": 147
+    },
+    {
+      "ident": "EEEI",
+      "active": false,
+      "visited": true,
+      "name": "\u00c4mari Air Base",
+      "latitude": 59.26029968261719,
+      "longitude": 24.20849990844727,
+      "distance": 125,
+      "co2_consumption": 175
+    },
+    {
+      "ident": "EEHA",
+      "active": false,
+      "visited": true,
+      "name": "Humala Aerodrome",
+      "latitude": 59.3579,
+      "longitude": 24.3795,
+      "distance": 111,
+      "co2_consumption": 161
+    },
+    {
+      "ident": "EEJI",
+      "active": false,
+      "visited": true,
+      "name": "J\u00f5hvi Airfield",
+      "latitude": 59.329167,
+      "longitude": 27.397222,
+      "distance": 175,
+      "co2_consumption": 225
+    },
+    {
+      "ident": "EEKA",
+      "active": false,
+      "visited": true,
+      "name": "K\u00e4rdla Airport",
+      "latitude": 58.99079895019531,
+      "longitude": 22.8306999206543,
+      "distance": 190,
+      "co2_consumption": 240
+    },
+    {
+      "ident": "EELU",
+      "active": false,
+      "visited": true,
+      "name": "Lyckholm Airstrip",
+      "latitude": 59.02211,
+      "longitude": 23.57808,
+      "distance": 164,
+      "co2_consumption": 214
+    },
+    {
+      "ident": "EENI",
+      "active": false,
+      "visited": true,
+      "name": "Nurmsi Airfield",
+      "latitude": 58.865002,
+      "longitude": 25.73,
+      "distance": 167,
+      "co2_consumption": 217
+    },
+    {
+      "ident": "EERA",
+      "active": false,
+      "visited": true,
+      "name": "Rapla Airfield",
+      "latitude": 58.9864006042,
+      "longitude": 24.7243995667,
+      "distance": 148,
+      "co2_consumption": 198
+    },
+    {
+      "ident": "EERE",
+      "active": false,
+      "visited": true,
+      "name": "Rakvere Airfield",
+      "latitude": 59.364799,
+      "longitude": 26.359136,
+      "distance": 131,
+      "co2_consumption": 181
+    }
+  ],
+  "goals": [
+    {
+      "goalid": 1,
+      "name": "Eurooppa",
+      "description": "Eurooppa",
+      "icon": "https://openweathermap.org/img/wn/01d.png",
+      "reached": false,
+      "target": "TEMP",
+      "target_minvalue": 25.0,
+      "target_maxvalue": 9999.0,
+      "target_text": ""
+    },
+    {
+      "goalid": 2,
+      "name": "Aasia",
+      "description": "Aasia",
+      "icon": "https://openweathermap.org/img/wn/13d.png",
+      "reached": false,
+      "target": "TEMP",
+      "target_minvalue": -9999.0,
+      "target_maxvalue": -20.0,
+      "target_text": ""
+    },
+    {
+      "goalid": 3,
+      "name": "Afrikka",
+      "description": "Temperature exactly 0C",
+      "icon": "https://openweathermap.org/img/wn/04d.png",
+      "reached": false,
+      "target": "TEMP",
+      "target_minvalue": -0.5,
+      "target_maxvalue": 0.5,
+      "target_text": ""
+    },
+    {
+      "goalid": 4,
+      "name": "Pohjois-Amerikka",
+      "description": "Temperature exactly +10C",
+      "icon": "https://openweathermap.org/img/wn/04d.png",
+      "reached": false,
+      "target": "TEMP",
+      "target_minvalue": 9.5,
+      "target_maxvalue": 10.5,
+      "target_text": ""
+    },
+    {
+      "goalid": 5,
+      "name": "Etelä-Amerikka",
+      "description": "Temperature exactly +20C",
+      "icon": "https://openweathermap.org/img/wn/04d.png",
+      "reached": false,
+      "target": "TEMP",
+      "target_minvalue": 19.5,
+      "target_maxvalue": 20.5,
+      "target_text": ""
+    },
+    {
+      "goalid": 6,
+      "name": "Australia",
+      "description": "Clear skies",
+      "icon": "https://openweathermap.org/img/wn/01d.png",
+      "reached": true,
+      "target": "WEATHER",
+      "target_minvalue": 0.0,
+      "target_maxvalue": 0.0,
+      "target_text": "Clear"
+    },
+    {
+      "goalid": 7,
+      "name": "Etelämanner",
+      "description": "Cloudy",
+      "icon": "https://openweathermap.org/img/wn/04d.png",
+      "reached": false,
+      "target": "WEATHER",
+      "target_minvalue": 0.0,
+      "target_maxvalue": 0.0,
+      "target_text": "Clouds"
+    },
+    {
+      "goalid": 8,
+      "name": "WINDY",
+      "description": "Wind blows more than 10 m/s",
+      "icon": "https://openweathermap.org/img/wn/04d.png",
+      "reached": false,
+      "target": "WIND",
+      "target_minvalue": 10.0,
+      "target_maxvalue": 9999.0,
+      "target_text": ""
+    }
+  ]
+}
