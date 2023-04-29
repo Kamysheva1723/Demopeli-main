@@ -5,9 +5,8 @@ import config
 
 class Game:
 
-    def __init__(self, id, loc, consumption, player=None):
+    def __init__(self, id, loc, player=None):
         self.status = {}
-        self.location = []
         self.goals = []
 
         if id==0:
@@ -18,18 +17,14 @@ class Game:
             self.status = {
                 "id" : ''.join(random.choice(letters) for i in range(20)),
                 "name" : player,
-                "co2" : {
-                    "consumed" : config.co2_initial,
-                    "budget" : config.co2_budget
-                },
+                "reached_lands": [],
                 "previous_location" : ""
             }
 
+            # add start airport to reached goals
+            self.goals.append(getLand(loc))
 
-            #self.id = ''.join(random.choice(letters) for i in range(20))
-            #self.footprint = config.initial_footprint
-            self.location.append(Airport(loc, True))
-            #self.player = player
+
             # Insert new game into DB
             sql = "INSERT INTO Game VALUES ('" + self.status["id"] + "', " + str(self.status["co2"]["consumed"])
             sql += ", " + str(self.status["co2"]["budget"]) + ", '" + loc + "', '" + self.status["name"] + "')"
@@ -75,6 +70,10 @@ class Game:
 
 
 
+
+
+
+    def get_land(self,iso_country):
 
 
     def set_location(self, sijainti):
