@@ -125,11 +125,26 @@ async function gameSetup(url) {
         console.log(greenIcon);
       } else {
         marker.setIcon(blueIcon);
+
+        const countryInfo = await getData("https://restcountries.com/v3.1/alpha/"+ airport.iso_country);
+        //console.log("https://restcountries.com/v3.1/alpha/"+ airport.iso_country);
+        //console.log(countryInfo)
+
+        const airportFlag = countryInfo[0].flags.svg;
+
+        const tagFigure = document.createElement('figure')
+        const tagFlag = document.createElement('img');
+        tagFlag.src = airportFlag;
+        tagFlag.style = "width: 100%; height: 100%;";
+        tagFigure.appendChild(tagFlag);
+
         const popupContent = document.createElement('div');
         const h4 = document.createElement('h4');
         h4.innerHTML = airport.name;
+
         const qForm = document.createElement('select');
         qForm.classList.add('qForm');
+
 
         const pQuestion = document.createElement('p');
         pQuestion.innerHTML = airport.question['question'];
@@ -139,6 +154,8 @@ async function gameSetup(url) {
         flyButton.classList.add('flyButton');
 
         const formContainer = document.createElement('div'); // Add a container div for form elements
+        formContainer.appendChild(h4); //append name
+        formContainer.appendChild(tagFigure); //append flag
         formContainer.appendChild(pQuestion); // Append the p element to the container div
         formContainer.appendChild(qForm); // Append the select element to the container div
         formContainer.appendChild(flyButton); //Append button
