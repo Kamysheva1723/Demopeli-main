@@ -4,12 +4,14 @@ import random
 
 import mysql.connector
 
+from dotenv import load_dotenv
+
 from flask import Flask, request
 from flask_cors import CORS
 import config
 from game import Game
 
-
+load_dotenv()
 
 app = Flask(__name__)
 # lisätty cors
@@ -26,12 +28,16 @@ config.conn = mysql.connector.connect(
          autocommit=True
          )
 
-def fly(id, dest):
+def fly(id, dest, player=None):
     if id==0:
         game = Game(0, dest, player)
     else:
         game = Game(id, dest)
 
+    nearby = game.location[0].find_nearby_airports()
+    for a in nearby:
+        game.location.append(a)
+    json_data = json.dumps(game, default=lambda o: o.__dict__, indent=4)
     return json_data
 
 
@@ -41,13 +47,16 @@ def flyto():
     args = request.args
     id = args.get("game")
     dest = args.get("dest")
-    consumption = args.get("consumption")
-    json_data = fly(id, dest, consumption)
+    json_data = fly(id, dest)
     print("*** Called flyto endpoint ***")
     return json_data
 
 
 # http://127.0.0.1:5000/newgame?player=Vesa&loc=EFHK
+# request.args is a dictionary-like object in Flask that contains the parsed
+# contents of the query string in a URL. When a client makes a GET request
+# to a Flask endpoint and includes query parameters in the URL,
+# Flask automatically parses these parameters into a MultiDict object and assigns it to request.args.
 @app.route('/newgame')
 def newgame():
     args = request.args

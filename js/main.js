@@ -1,11 +1,20 @@
-//#player-name form for paler's name in the game window
+/*
+
+#player-name form for paler's name in the game window
+#airport-name
+#airport-country
+#airport-continent
+#airport-flag
+
+*/
 
 'use strict';
 
 const apiUrl = 'http://127.0.0.1:5000/';
 const startLoc = 'EFHK';
-const globalGoals = [];
+const globalGoals = [];  //here will be reached goals
 const airportMarkers = L.featureGroup().addTo(map);
+const flightCounter = 0;
 
 const blueIcon = L.divIcon({className: 'blue-icon'});
 const greenIcon = L.divIcon({className: 'green-icon'});
@@ -71,14 +80,33 @@ function updateStatus(status) {
 
 }
 
-// function to show weather at selected airport
-//TODO joke or coffe picture???
+// function to show information about airport
+
+function showAirportDetails(airport) {
+  document.querySelector('#airport-name').innerHTML = `This is ${airport.name}`;
+  document.querySelector('#airport-country').innerHTML = `It is situated in ${airport.country}`;
+  document.querySelector('#airport-continent').innerHTML = `${airport.country} is situated in ${airport.continent}`;
+  document.querySelector('#airport-flag').src = airport.flag;
+}
 
 // function to check if any goals have been reached
-
-// function to update goal data and goal table in UI
+function checkGoals(continent) {
+   if (!globalGoals.includes(continent)) {
+        document.querySelector('.goal').classList.remove('hide');
+        location.href = '#goals';
+  }
+}
 
 // function to check if game is over
+
+// function to check if game is over
+function checkGameOver() {
+  if (flightCounter => 21 ) {
+    alert(`Game Over`);
+    return false;
+  }
+  return true;
+}
 
 // function to set up game
 async function gameSetup(url) {
@@ -159,71 +187,22 @@ async function gameSetup(url) {
   }
 }
 
-// this is the main function that creates the game and calls the other functions
 
-gameSetup();
+
+
 
 // event listener to hide goal splash
 
-/*
+document.querySelector('.goal').addEventListener('click', function (evt) {
+  evt.currentTarget.classList.add('hide');
+});
 
-
-
-// function to show weather at selected airport
-function showWeather(airport) {
-  document.querySelector('#airport-name').innerHTML = `Weather at ${airport.name}`;
-  document.querySelector('#airport-temp').innerHTML = `${airport.weather.temp}°C`;
-  document.querySelector('#weather-icon').src = airport.weather.icon;
-  document.querySelector('#airport-conditions').innerHTML = airport.weather.description;
-  document.querySelector('#airport-wind').innerHTML = `${airport.weather.wind.speed}m/s`;
-}
-
-// function to check if any goals have been reached
-function checkGoals(meets_goals) {
-  if (meets_goals.length > 0) {
-    for (let goal of meets_goals) {
-      if (!globalGoals.includes(goal)) {
-        document.querySelector('.goal').classList.remove('hide');
-        location.href = '#goals';
-      }
-    }
-  }
-}
-
-// function to update goal data and goal table in UI
-function updateGoals(goals) {
-  document.querySelector('#goals').innerHTML = '';
-  for (let goal of goals) {
-    const li = document.createElement('li');
-    const figure = document.createElement('figure');
-    const img = document.createElement('img');
-    const figcaption = document.createElement('figcaption');
-    img.src = goal.icon;
-    img.alt = `goal name: ${goal.name}`;
-    figcaption.innerHTML = goal.description;
-    figure.append(img);
-    figure.append(figcaption);
-    li.append(figure);
-    if (goal.reached) {
-      li.classList.add('done');
-      globalGoals.includes(goal.goalid) || globalGoals.push(goal.goalid);
-    }
-    document.querySelector('#goals').append(li);
-  }
-}
-
-// function to check if game is over
-function checkGameOver(budget) {
-  if (budget <= 0) {
-    alert(`Game Over. ${globalGoals.length} goals reached.`);
-    return false;
-  }
-  return true;
-}
-
-// function to set up game
 // this is the main function that creates the game and calls the other functions
-async function gameSetup(url) {
+
+gameSetup(apiUrl);
+
+
+/*
   try {
     document.querySelector('.goal').classList.add('hide');
     airportMarkers.clearLayers();
@@ -266,8 +245,5 @@ async function gameSetup(url) {
   }
 }
 
-// event listener to hide goal splash
-document.querySelector('.goal').addEventListener('click', function (evt) {
-  evt.currentTarget.classList.add('hide');
-});
+
 */

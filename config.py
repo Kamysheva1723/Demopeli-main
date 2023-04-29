@@ -1,4 +1,6 @@
-
+max_distance = 200
+max_lat_dist = max_distance/50
+max_lon_dist = max_distance/50
 default_starting_point = "EFKE"
 default_name = "Anna"
 
