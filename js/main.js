@@ -128,8 +128,8 @@ async function gameSetup(url) {
 
         const countryInfo = await getData("https://restcountries.com/v3.1/alpha/"+ airport.iso_country);
         //console.log("https://restcountries.com/v3.1/alpha/"+ airport.iso_country);
-        //console.log(countryInfo)
-
+        console.log(countryInfo);
+        const countryName = countryInfo[0].translations.fin.common;
         const airportFlag = countryInfo[0].flags.svg;
 
         const tagFigure = document.createElement('figure')
@@ -140,7 +140,7 @@ async function gameSetup(url) {
 
         const popupContent = document.createElement('div');
         const h4 = document.createElement('h4');
-        h4.innerHTML = airport.name;
+        h4.innerHTML = airport.name + ". Maa " + countryName + ".";
 
         const qForm = document.createElement('select');
         qForm.classList.add('qForm');
