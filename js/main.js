@@ -28,16 +28,7 @@ L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
 }).addTo(map);
 map.setView([60, 24], 7);
 
-//shake answers
-function shuffleList(list) {
-  for (let i = list.length - 1; i > 0; i--) {
-    var randomIndex = Math.floor(Math.random() * (i + 1));
-    var temp = list[i];
-    list[i] = list[randomIndex];
-    list[randomIndex] = temp;
-  }
-  return list;
-}
+
 
 //
 // form for player name, wich starts new game for player with name in text field

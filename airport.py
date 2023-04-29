@@ -1,11 +1,21 @@
 import config
-from geopy import distance
+import math
+import random
+import questions
 
 class Airport:
     # lisätty data, jottei tartte jokaista lentokenttää hakea erikseen
     def __init__(self, ident, active=False, data=None):
         self.ident = ident
         self.active = active
+
+        q = get_question_from_db()
+        self.question = {
+            "question": q[0],
+            "right_answer": q[1],
+            "wrong_answer1": q[2],
+            "wrong_answer2": q[3]
+        }
 
         # vältetään kauhiaa määrää hakuja
         if data is None:
@@ -31,8 +41,9 @@ class Airport:
             self.name = data['continent']
 
 
-    def find_random_airports(self):
 
+    #find 60 random from different continents
+    def find_random_airports(self):
         list = []
         lands = ["AN_","AS_","EU_","NA_","OC_","AF_","SA_"]
         for land in lands:
@@ -52,14 +63,23 @@ class Airport:
                     list.append(apt)
         return list
 
-    def distanceTo(self, target):
 
-        coords_1 = (self.latitude, self.longitude)
-        coords_2 = (target.latitude, target.longitude)
-        dist = distance.distance(coords_1, coords_2).km
-        return int(dist)
+#shake answers
+def shuffleList(list):
+  for i in range(list.length):
+      randomIndex = math.floor(math.random() * (i + 1))
+      temp = list[i]
+      list[i] = list[randomIndex]
+      list[randomIndex] = temp
+      return list
 
-
-
+def get_question_from_db():
+    random_id = random.randint(1, 29)
+    sql = "select questions.question, questions.option_1, questions.option_2,"+\
+          " questions.option_3  from questions where id = " +  str(random_id)
+    cur = config.conn.cursor()
+    cur.execute(sql)
+    res = cur.fetchall()
+    return res
 
 
