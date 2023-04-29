@@ -1,0 +1,24 @@
+//form for question
+          /*
+          const randomQuestion = {
+            'status': 200,
+            'id': 21,
+            'question': 'Paljonko on Etel\u00e4mantereen mannerj\u00e4\u00e4n keskim\u00e4\u00e4r\u00e4inen paksuus?',
+            'right_option': '2,5km',
+            'wrong_option_1': '1,4km',
+            'wrong_option_2': '4,1km',
+          };*/
+
+// function to update game status
+// "status": {"id": "8UdJb2gimIHPpkGaP6hT",
+//            "name": "Test Player",
+//            "visited_location": {
+//                "AS": false,
+//                "EU": false,
+//                "AF": false,
+//                "NA": false,
+//                "SA": false,
+//                "AU": false,
+//                "AN": false
+//     }
+

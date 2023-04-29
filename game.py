@@ -6,13 +6,13 @@ import config
 class Game:
 
     def __init__(self, id, loc, player=None):
-        self.status = {}
+        self.status= {}
         self.goals = []
         self.location = []
 
         if id == 0:
-            # new game
-            # Create new game id
+             # new game
+             # Create new game id
             letters = string.ascii_lowercase + string.ascii_uppercase + string.digits
 
             self.status = {
@@ -29,30 +29,30 @@ class Game:
                 }
             }
 
-            # define continent of the loc
 
-            sql = "select continent from airport where ident=" + loc + ';'
-            print(sql)
+            # define continent of the loc
+            self.location.append(Airport(loc, True))
+            sql = 'select continent from airport where ident="' + loc + '"'
             cur = config.conn.cursor()
             cur.execute(sql)
             res = cur.fetchall()
 
             # Insert new game into DB
 
-            sql = "INSERT INTO game (id, screen_Name, last_location, AN_,AS_,EU_,NA_,OC_,AF_,SA_) VALUES (" + \
-                  str(self.status.id) + ',' + str(
-                player) + ',' + loc + ', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,FALSE);'
+            sql = "INSERT INTO game (id, screen_Name, last_location, AN_,AS_,EU_,NA_,OC_,AF_,SA_) VALUES ('" + \
+                  str(self.status["id"]) + "','" + str(player) + "','" + loc + "', FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,FALSE)"
+            print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
 
             # define continent of the loc in the game table
 
-            sql = "select continent from airport where ident=" + loc
+            sql = "select continent from airport where ident='" + loc + "'"
             print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
             res = cur.fetchall()
-            sql = "update game set " + str(res[0]) + "_= TRUE where id = " + str(self.satus.id)
+            sql = "update game set " + str(res[0][0]) + "_= TRUE where id = '" + str(self.status["id"])+ "'"
             print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
@@ -62,7 +62,6 @@ class Game:
         else:
             # find game from DB
             sql = "SELECT id, last_location, screen_Name, AN_,AS_,EU_,NA_,OC_,AF_,SA_ FROM Game WHERE id='" + id + "';"
-            print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
             res = cur.fetchall()
@@ -84,7 +83,7 @@ class Game:
                 # old location in DB currently not used
                 apt = Airport(loc, True)
                 self.location.append(apt)
-                self.set_location(apt)
+                #self.set_location(apt)
 
             else:
                 print("************** PELIÄ EI LÖYDY! ***************")

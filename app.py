@@ -29,15 +29,17 @@ config.conn = mysql.connector.connect(
          )
 
 def fly(id, dest, player=None):
-    if id==0:
+    if id == 0:
         game = Game(0, dest, player)
     else:
         game = Game(id, dest)
-
-    nearby = game.location[0].find_nearby_airports()
-    for a in nearby:
+    #print("string 36   "+str(game.location))
+    ap_list = game.location[0].find_random_airports()
+    #print(str(ap_list));
+    for a in ap_list:
         game.location.append(a)
     json_data = json.dumps(game, default=lambda o: o.__dict__, indent=4)
+    #print("json "+str(json_data));
     return json_data
 
 
@@ -49,6 +51,7 @@ def flyto():
     dest = args.get("dest")
     json_data = fly(id, dest)
     print("*** Called flyto endpoint ***")
+
     return json_data
 
 
@@ -62,26 +65,10 @@ def newgame():
     args = request.args
     player = args.get("player")
     dest = args.get("loc")
-    json_data = fly(0, dest, 0, player)
+    json_data = fly(0, dest, player)
+    print("json  str69 app   " + str(json_data));
     return json_data
 
-def get_question_from_db():
-    yhteys = mysql.connector.connect(
-        host='127.0.0.1',
-        port=3306,  # MariaDB port
-        database='flight_game',
-        user='userN',
-        password='1234',
-        autocommit=True)
-
-    random_id = random.randint(1, 29)
-    sql = "select questions.id, questions.question, questions.option_1, questions.option_2,"+\
-          " questions.option_3  from questions where id = " +  str(random_id)
-
-    kursori = yhteys.cursor()
-    kursori.execute(sql)
-    tulos = kursori.fetchone()
-    return tulos
 
 
 
