@@ -9,7 +9,7 @@
 */
 
 'use strict';
-
+let pointA, pointB;
 const apiUrl = 'http://127.0.0.1:5000/';
 const startLoc = 'EFHK';
 const globalGoals = [];  //here will be reached goals
@@ -28,6 +28,7 @@ const flightCounter = 0;
 
 const blueIcon = L.divIcon({className: 'blue-icon'});
 const greenIcon = L.divIcon({className: 'green-icon'});
+const redIcon = L.divIcon({className: 'red-icon'});
 
 //
 
@@ -58,7 +59,7 @@ async function getData(url) {
   const data = await response.json();
   //console.log(url);
   //console.log(data);
-  return data
+  return data;
 }
 
 function updateStatus(status) {
@@ -106,19 +107,28 @@ async function gameSetup(url) {
   try {
     //document.querySelector('.goal').classList.add('hide');
     airportMarkers.clearLayers();
-    const gameData = await getData(url + '/newgame?player=Vesa&loc=EFHK');
+    const gameData = await getData(url);
     //updateStatus(gameData.status);
     //console.log(JSON.stringify(gameData));
 
-    for (let i=0; i<gameData.location.length;i++) {
+    for (let i = 0; i < gameData.location.length; i++) {
       const airport = gameData.location[i];
 
       //console.log(JSON.stringify(gameData.location[i]))
 
       const marker = L.marker([airport.latitude, airport.longitude]).addTo(map);
 
+      airportMarkers.addLayer(marker);
+
       if (airport.active) {
-        map.flyTo([airport.latitude, airport.longitude], 10);
+        map.flyTo([airport.latitude, airport.longitude], 3);
+        const markerRed = L.marker([airport.latitude, airport.longitude]).addTo(map);
+        markerRed.setIcon(redIcon);
+        pointA = L.latLng(airport.latitude, airport.longitude);
+
+
+        //map.flyTo([airport.latitude, airport.longitude], 2);
+
         marker.bindPopup(airport.name);
         marker.openPopup();
         marker.setIcon(greenIcon);
@@ -126,25 +136,25 @@ async function gameSetup(url) {
       } else {
         marker.setIcon(blueIcon);
 
-        const countryInfo = await getData("https://restcountries.com/v3.1/alpha/"+ airport.iso_country);
+        const countryInfo = await getData(
+            'https://restcountries.com/v3.1/alpha/' + airport.iso_country);
         //console.log("https://restcountries.com/v3.1/alpha/"+ airport.iso_country);
         console.log(countryInfo);
         const countryName = countryInfo[0].translations.fin.common;
         const airportFlag = countryInfo[0].flags.svg;
 
-        const tagFigure = document.createElement('figure')
+        const tagFigure = document.createElement('figure');
         const tagFlag = document.createElement('img');
         tagFlag.src = airportFlag;
-        tagFlag.style = "width: 100%; height: 100%;";
+        tagFlag.style = 'width: 100%; height: 100%; box-shadow: 2px 2px 2px #888; border: 0.5px solid gray';
         tagFigure.appendChild(tagFlag);
 
         const popupContent = document.createElement('div');
         const h4 = document.createElement('h4');
-        h4.innerHTML = airport.name + ".<br> Maa " + countryName + ". <br>";
+        h4.innerHTML = "Olet tässä: " + airport.name + '.<br> Maa ' + countryName + '. <br>';
 
         const qForm = document.createElement('select');
         qForm.classList.add('qForm');
-
 
         const pQuestion = document.createElement('p');
         pQuestion.innerHTML = airport.question['question'];
@@ -158,7 +168,13 @@ async function gameSetup(url) {
         formContainer.appendChild(tagFigure); //append flag
         formContainer.appendChild(pQuestion); // Append the p element to the container div
         formContainer.appendChild(qForm); // Append the select element to the container div
-        formContainer.appendChild(flyButton); //Append button
+
+        // Create a new div for the button
+        const buttonContainer = document.createElement('div');
+        buttonContainer.appendChild(flyButton);
+        formContainer.appendChild(buttonContainer); // Append the button div to the container div
+
+        qForm.classList.add('qForm_elements');
 
         const rightOption = airport.question['right_option'];
         const shList = shuffleList([
@@ -170,13 +186,21 @@ async function gameSetup(url) {
           option.text = shList[i];
           qForm.appendChild(option);
         }
+        flyButton.classList.add('qForm_elements');
         popupContent.append(formContainer); // Append the container div to the popupContent element
         marker.bindPopup(popupContent);
-        //console.log(qForm);
+        flyButton.addEventListener('click', function() {
+           if (qForm.value === airport.question.right_option) {
+             pointB = L.latLng(airport.latitude, airport.longitude);
+             const line = L.polyline([pointA, pointB], {dashArray: '10, 10', color: 'red', weight: 5}).addTo(map);
+             gameSetup(`${apiUrl}flyto?game=${gameData.status.id}&dest=${airport.ident}`);
+           } else {
+             alert("oho :( vastausi on väärä" + " ro " + airport.question.right_option + " wo1 "+ airport.question.wrong_option1 + " wo2 "+ airport.question.wrong_option2);
+           }
+        });
 
 
       }
-
 
     }
   } catch (error) {
@@ -192,7 +216,7 @@ async function gameSetup(url) {
 
 // this is the main function that creates the game and calls the other functions
 
-gameSetup(apiUrl);
+gameSetup(apiUrl+ '/newgame?player=Vesa&loc=EFHK');
 
 /*
   try {

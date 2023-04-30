@@ -47,8 +47,11 @@ def fly(id, dest, player=None):
 @app.route('/flyto')
 def flyto():
     args = request.args
+    print(args)
     id = args.get("game")
+    print(id)
     dest = args.get("dest")
+    print(dest)
     json_data = fly(id, dest)
     print("*** Called flyto endpoint ***")
 
