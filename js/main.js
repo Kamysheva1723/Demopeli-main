@@ -30,7 +30,6 @@ map.setView([60, 24], 7);
 
 const airportMarkers = L.featureGroup().addTo(map);
 
-
 const blueIcon = L.divIcon({className: 'blue-icon'});
 const greenIcon = L.divIcon({className: 'green-icon'});
 const redIcon = L.divIcon({className: 'red-icon'});
@@ -68,44 +67,26 @@ async function getData(url) {
 }
 
 function updateFooter(status) {
-  console.log(status)
+  console.log(status);
   document.querySelector('#player-name').innerHTML = `Player: ${status.name}`;
-
-  for (land of status.visited_location) {
-    document.querySelector(land).innerHTML = status.visied_location[land] ?
+  for (let land in status.visited_location) {
+    console.log(land);
+    document.getElementById(land).innerHTML = status.visited_location[land] ?
         '${land} on käytetty' :
-        '${land }ei ole käytetty';
-  }
-
-
-}
-
-// function to show information about airport
-
-function showAirportDetails(airport) {
-  document.querySelector('#airport-name').innerHTML = `This is ${airport.name}`;
-  document.querySelector(
-      '#airport-country').innerHTML = `It is situated in ${airport.country}`;
-  document.querySelector(
-      '#airport-continent').innerHTML = `${airport.country} is situated in ${airport.continent}`;
-  document.querySelector('#airport-flag').src = airport.flag;
-}
-
-// function to check if any goals have been reached
-function checkGoals(continent) {
-  if (!globalGoals.includes(continent)) {
-    document.querySelector('.goal').classList.remove('hide');
-    location.href = '#goals';
+        '${land} ei ole käytetty';
   }
 }
 
 // function to check if game is over
-function checkGameOver(sataus) {
-  if (flightCounter => flightMax) || status.game_over {
+function GameOver(status) {
+  if ((flightCounter >= flightMax) || status.game_over) {
+    console.log(flightCounter);
+    console.log(flightMax);
+    console.log(status.game_over);
     alert(`Game Over`);
-    return false;
+    return true;
   }
-  return true;
+  return false;
 }
 
 // function to set up game
@@ -116,7 +97,7 @@ async function gameSetup(url) {
     const gameData = await getData(url);
     updateFooter(gameData.status);
     //console.log(JSON.stringify(gameData));
-    if (!checkGameOver(gameData.status)) return;
+    if (GameOver(gameData.status)) return;
     for (let i = 0; i < gameData.location.length; i++) {
       const airport = gameData.location[i];
 
@@ -128,10 +109,10 @@ async function gameSetup(url) {
 
       if (airport.active) {
         map.flyTo([airport.latitude, airport.longitude], 3);
-        const markerRed = L.marker([airport.latitude, airport.longitude]).addTo(map);
+        const markerRed = L.marker([airport.latitude, airport.longitude]).
+            addTo(map);
         markerRed.setIcon(redIcon);
         pointA = L.latLng(airport.latitude, airport.longitude);
-
 
         //map.flyTo([airport.latitude, airport.longitude], 2);
 
@@ -157,7 +138,8 @@ async function gameSetup(url) {
 
         const popupContent = document.createElement('div');
         const h4 = document.createElement('h4');
-        h4.innerHTML = "Olet tässä: " + airport.name + '.<br> Maa ' + countryName + '. <br>';
+        h4.innerHTML = 'Olet tässä: ' + airport.name + '.<br> Maa ' +
+            countryName + '. <br>';
 
         const qForm = document.createElement('select');
         qForm.classList.add('qForm');
@@ -196,16 +178,20 @@ async function gameSetup(url) {
         popupContent.append(formContainer); // Append the container div to the popupContent element
         marker.bindPopup(popupContent);
         flyButton.addEventListener('click', function() {
-           if (qForm.value === airport.question.right_option) {
-             flightCounter = flightCounter + 1;
-             pointB = L.latLng(airport.latitude, airport.longitude);
-             const line = L.polyline([pointA, pointB], {dashArray: '10, 10', color: 'red', weight: 5}).addTo(map);
-             gameSetup(`${apiUrl}flyto?game=${gameData.status.id}&dest=${airport.ident}`);
-           } else {
-             alert("oho :( vastausi on väärä" + " ro " + airport.question.right_option + " wo1 "+ airport.question.wrong_option1 + " wo2 "+ airport.question.wrong_option2);
-           }
+          if (qForm.value === airport.question.right_option) {
+            flightCounter = flightCounter + 1;
+            pointB = L.latLng(airport.latitude, airport.longitude);
+            const line = L.polyline([pointA, pointB],
+                {dashArray: '10, 10', color: 'red', weight: 5}).addTo(map);
+            gameSetup(
+                `${apiUrl}flyto?game=${gameData.status.id}&dest=${airport.ident}`);
+          } else {
+            alert('oho :( vastausi on väärä' + ' ro ' +
+                airport.question.right_option + ' wo1 ' +
+                airport.question.wrong_option1 + ' wo2 ' +
+                airport.question.wrong_option2);
+          }
         });
-
 
       }
 
@@ -223,7 +209,7 @@ async function gameSetup(url) {
 
 // this is the main function that creates the game and calls the other functions
 
-gameSetup(apiUrl+ '/newgame?player=Vesa&loc=EFHK');
+gameSetup(apiUrl + '/newgame?player=Nata&loc=EFHK');
 
 /*
   try {

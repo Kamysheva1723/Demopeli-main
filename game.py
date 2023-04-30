@@ -7,7 +7,6 @@ class Game:
 
     def __init__(self, id, loc, player=None):
         self.status= {}
-        self.game_over = 0;
         self.location = []
 
         if id == 0:
@@ -18,9 +17,10 @@ class Game:
             self.status = {
                 "id": ''.join(random.choice(letters) for i in range(20)),
                 "name": player,
+                "game_over": False,
                 "visited_location": {
                     "AN_": False,
-                    "ES_": False,
+                    "AS_": False,
                     "EU_": False,
                     "NA_": False,
                     "OC_": False,
@@ -67,7 +67,7 @@ class Game:
             cur = config.conn.cursor()
             cur.execute(sql)
             res = cur.fetchall()
-            sql = "update game set " + str(res[0][0]) + "_= TRUE where id = '" + str(self.status["id"]) + "'"
+            sql = "update game set " + str(res[0][0]) + "_= TRUE where id = '" + str(id) + "'"
             print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
@@ -82,6 +82,7 @@ class Game:
                 self.status = {
                     "id": res[0][0],
                     "name": res[0][2],
+                    "game_over": res[0][3]*res[0][4]*res[0][5]*res[0][6]*res[0][7]*res[0][8]*res[0][9],
                     "visited_location": {
                         "AN_": res[0][3],
                         "AS_": res[0][4],
