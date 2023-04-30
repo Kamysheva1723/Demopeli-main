@@ -113,7 +113,7 @@ async function gameSetup(url) {
     for (let i=0; i<gameData.location.length;i++) {
       const airport = gameData.location[i];
 
-      console.log(JSON.stringify(gameData.location[i]))
+      //console.log(JSON.stringify(gameData.location[i]))
 
       const marker = L.marker([airport.latitude, airport.longitude]).addTo(map);
 
