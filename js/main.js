@@ -10,6 +10,11 @@
 
 'use strict';
 let pointA, pointB;
+let flightCounter = 0;
+
+//TODO change to 21
+const flightMax = 5;
+
 const apiUrl = 'http://127.0.0.1:5000/';
 const startLoc = 'EFHK';
 const globalGoals = [];  //here will be reached goals
@@ -24,7 +29,7 @@ L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
 map.setView([60, 24], 7);
 
 const airportMarkers = L.featureGroup().addTo(map);
-const flightCounter = 0;
+
 
 const blueIcon = L.divIcon({className: 'blue-icon'});
 const greenIcon = L.divIcon({className: 'green-icon'});
@@ -62,15 +67,16 @@ async function getData(url) {
   return data;
 }
 
-function updateStatus(status) {
-  /*console.log(status)
+function updateFooter(status) {
+  console.log(status)
   document.querySelector('#player-name').innerHTML = `Player: ${status.name}`;
 
   for (land of status.visited_location) {
     document.querySelector(land).innerHTML = status.visied_location[land] ?
         '${land} on käytetty' :
         '${land }ei ole käytetty';
-  }*/
+  }
+
 
 }
 
@@ -94,8 +100,8 @@ function checkGoals(continent) {
 }
 
 // function to check if game is over
-function checkGameOver() {
-  if (flightCounter => 21) {
+function checkGameOver(sataus) {
+  if (flightCounter => flightMax) || status.game_over {
     alert(`Game Over`);
     return false;
   }
@@ -108,9 +114,9 @@ async function gameSetup(url) {
     //document.querySelector('.goal').classList.add('hide');
     airportMarkers.clearLayers();
     const gameData = await getData(url);
-    //updateStatus(gameData.status);
+    updateFooter(gameData.status);
     //console.log(JSON.stringify(gameData));
-
+    if (!checkGameOver(gameData.status)) return;
     for (let i = 0; i < gameData.location.length; i++) {
       const airport = gameData.location[i];
 
@@ -191,6 +197,7 @@ async function gameSetup(url) {
         marker.bindPopup(popupContent);
         flyButton.addEventListener('click', function() {
            if (qForm.value === airport.question.right_option) {
+             flightCounter = flightCounter + 1;
              pointB = L.latLng(airport.latitude, airport.longitude);
              const line = L.polyline([pointA, pointB], {dashArray: '10, 10', color: 'red', weight: 5}).addTo(map);
              gameSetup(`${apiUrl}flyto?game=${gameData.status.id}&dest=${airport.ident}`);

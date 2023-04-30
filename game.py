@@ -7,7 +7,7 @@ class Game:
 
     def __init__(self, id, loc, player=None):
         self.status= {}
-        self.goals = []
+        self.game_over = 0;
         self.location = []
 
         if id == 0:
@@ -60,6 +60,18 @@ class Game:
             # config.conn.commit()
 
         else:
+            # add current location to db
+
+            sql = "select continent from airport where ident='" + loc + "'"
+            print(sql)
+            cur = config.conn.cursor()
+            cur.execute(sql)
+            res = cur.fetchall()
+            sql = "update game set " + str(res[0][0]) + "_= TRUE where id = '" + str(self.status["id"]) + "'"
+            print(sql)
+            cur = config.conn.cursor()
+            cur.execute(sql)
+
             # find game from DB
             sql = "SELECT id, last_location, screen_Name, AN_,AS_,EU_,NA_,OC_,AF_,SA_ FROM Game WHERE id='" + id + "';"
             cur = config.conn.cursor()
@@ -81,9 +93,15 @@ class Game:
                     }
                 }
                 # old location in DB currently not used
+
                 apt = Airport(loc, True)
                 self.location.append(apt)
                 #self.set_location(apt)
+
+                sql = "SELECT AN_*AS_*EU_*NA_*OC_*AF_*SA_ FROM Game WHERE id='" + id + "';"
+                cur = config.conn.cursor()
+                cur.execute(sql)
+                self.game_over = cur.fetchall()
 
             else:
                 print("************** PELIÄ EI LÖYDY! ***************")
