@@ -48,12 +48,12 @@ class Game:
             # define continent of the loc in the game table
 
             sql = "select continent from airport where ident='" + loc + "'"
-            print(sql)
+            #print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
             res = cur.fetchall()
             sql = "update game set " + str(res[0][0]) + "_= TRUE where id = '" + str(self.status["id"])+ "'"
-            print(sql)
+            #print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
 
@@ -63,12 +63,12 @@ class Game:
             # add current location to db
 
             sql = "select continent from airport where ident='" + loc + "'"
-            print(sql)
+            #print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
             res = cur.fetchall()
             sql = "update game set " + str(res[0][0]) + "_= TRUE where id = '" + str(id) + "'"
-            print(sql)
+            #print(sql)
             cur = config.conn.cursor()
             cur.execute(sql)
 
@@ -97,7 +97,6 @@ class Game:
 
                 apt = Airport(loc, True)
                 self.location.append(apt)
-                #self.set_location(apt)
 
                 sql = "SELECT AN_*AS_*EU_*NA_*OC_*AF_*SA_ FROM Game WHERE id='" + id + "';"
                 cur = config.conn.cursor()

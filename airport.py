@@ -1,7 +1,7 @@
 import config
 import math
 import random
-import questions
+
 
 class Airport:
     # lisätty data, jottei tartte jokaista lentokenttää hakea erikseen
