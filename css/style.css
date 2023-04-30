@@ -5,21 +5,25 @@ html {
 }
 
 .container {
+    display: inline;
 }
 
 #header {
     color: #3f3f3f;
     background-color: slategray;
-    padding: 2rem;
+    padding: 1rem;
     text-align: left;
+    width: 90%;
+
 }
+
+
 
 main {
     display: flex;
-    position: absolute;
-    width: 80%;
     margin: auto;
 }
+
 
 #nav a, #title {
     color: darkblue;
@@ -74,55 +78,51 @@ main section {
     padding: 3rem;
     border: 1px solid gray;
     margin: 2rem;
+    width: 100%;
+    height: 100%;
 }
 
 #map {
-    width: 60%;
+    width: 90%;
+    height: 75vh;
 }
 
 #right {
-    width: 40%;
+    alignment: right;
+    width: 10%;
 }
 
-
-.goal {
-
-}
-
-.goal_reached{
-    color: aquamarine;
-}
-
-.goals_reached {
-    display: flex;
+.goals {
+    display: inline-flex;
     color: #3f3f3f;
     background-color: #7c90a2;
     margin: 1rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 8rem;
-}
 
+}
 
 footer figure {
     color: darkblue;
     background: #a26b83;
-    width: 14%;
-    line-height: 3rem;
-    padding: 2rem;
+    width: 10%;
+    line-height: 1rem;
+    padding: 1rem;
     text-align: center;
 }
 
-
-.blueIcon {
+.blue-icon {
     background-color: deepskyblue;
     border-radius: 50%;
     border: 5px solid rgba(255, 255, 255, 0.5);
 }
 
-.greenIcon {
+.green-icon {
     background-color: greenyellow;
     border-radius: 50%;
     border: 5px solid rgba(255, 255, 255, 0.5);
 }
+
+
+.goals{
+
+}
+

@@ -140,7 +140,7 @@ async function gameSetup(url) {
 
         const popupContent = document.createElement('div');
         const h4 = document.createElement('h4');
-        h4.innerHTML = airport.name + ". Maa " + countryName + ".";
+        h4.innerHTML = airport.name + ".<br> Maa " + countryName + ". <br>";
 
         const qForm = document.createElement('select');
         qForm.classList.add('qForm');
