@@ -498,3 +498,28 @@ ul {
     border: 5px solid rgba(255, 255, 255, 0.5);
 }
 
+.lasi-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+  line-height: 4rem;
+  text-align: center;
+
+}
+.lasi-text {
+  color: orangered;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: none;
+  line-height: 4rem;
+  text-align: center;
+
+}
+
+.lasi-container img {
+  max-width: 100%;
+}

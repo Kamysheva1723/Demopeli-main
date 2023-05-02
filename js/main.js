@@ -31,6 +31,13 @@ function shuffleList(list) {
   return list;
 }
 
+// event listener to hide goal splash
+document.querySelector('.lasi-container').addEventListener('click', function (evt) {
+  evt.currentTarget.style.display = "none";
+
+});
+
+
 //
 // form for player name, wich starts new game for player with name in text field
 //
@@ -85,6 +92,9 @@ function updateFooter(status) {
 // function to set up game
   async function gameSetup(url) {
     try {
+      document.querySelector('.lasi-container').classList.add('hide');
+      document.querySelector('.lasi-text').classList.add('hide');
+
       airportMarkers.clearLayers();
 
       const gameData = await getData(url);
@@ -193,10 +203,12 @@ function updateFooter(status) {
               gameSetup(
                   `${apiUrl}flyto?game=${gameData.status.id}&dest=${airport.ident}`);
             } else {
-              alert('oho :( vastausi on väärä' + ' ro ' +
+              document.querySelector(".lasi-container").style.display = "block";
+              document.querySelector(".lasi-text").style.display = "block";
+              /*alert('oho :( vastausi on väärä' + ' ro ' +
                   airport.question.right_option + ' wo1 ' +
                   airport.question.wrong_option1 + ' wo2 ' +
-                  airport.question.wrong_option2);
+                  airport.question.wrong_option2);*/
             }
           });
         }
