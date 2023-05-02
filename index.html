@@ -2,81 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="insert name here"
-          content="insert content description here"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"/>
 
-    <title>21</title>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https:unpkg.com/leaflet@1.8.0/dist/leaflet.css"/>
     <link rel="shortcut icon" href="#">
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
     <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" defer></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.esm.js" defer></script>
-    <script nomodule src="https://cdn.jsdelivr.net/npm/ionicons/dist/ionicons/ionicons.js" defer></script>
     <script src="js/main.js" defer></script>
-
-
+    <!--<script src="js/esimerkki.js" defer></script>-->
+    <title>21 home</title>
 </head>
-<body>
 
+<body>
 <div class="container">
-    <header id="header">
-        <nav id="nav">
-            <h1 id="title">21</h1>
-            <h4 id="player-name"></h4>
-            <a title="home" href="main.html">HOME</a>
-            <a title="map" href="map.html">MAP</a>
-            <select id="options">
-                <option value="choose">OPTIONS</option>
-                <option value="instructions">instructions</option>
-                <option value="change_name">change username</option>
-                <option value="save">save</option>
-                <option value="stop">stop playing</option>
-            </select>
+    <header class="header">
+        <h1>21</h1>
+        <nav>
+            <ul class="flex-wrap space-evenly">
+                <li>
+                    <a class="button nav-button" title="about" href="about.html">ABOUT</a>
+                </li>
+                <li>
+                    <a class="button nav-button" title="start" href="start.html">START</a>
+                </li>
+            </ul>
         </nav>
     </header>
 
-
     <main>
-        <section id="map">
-            <div id="map"> </div>
-        </section>
-        <!--<section id="right">
-            <article>
-                <p id="text">pelin teksti tähän :D</p>
-            </article>
-        </section>-->
+        <div id="game-text"></div>
+        <div id="map"></div>
     </main>
 
-    <footer>
-        <figure id="AS_" title="AS">
-            <figcaption>asia</figcaption>
-        </figure>
-        <figure id="EU_" title="EU">
-            <figcaption>europe</figcaption>
-        </figure>
-        <figure id="NA_" title="NA">
-            <figcaption>north<br>america</figcaption>
-        </figure>
-        <figure id="SA_" title="SA">
-            <figcaption>south<br>america</figcaption>
-        </figure>
-        <figure id="AN_" title="AN">
-            <figcaption>antarctica</figcaption>
-        </figure>
-        <figure id="OC_" title="OC">
-            <figcaption>australia</figcaption>
-        </figure>
-        <figure id="AF_" title="AF">
-            <figcaption>africa</figcaption>
-        </figure>
+    <footer class="footer">
+        <table class="space-evenly">
+            <td class="goal" id="AS_">AS</td>
+            <td class="goal" id="EU_">EU</td>
+            <td class="goal" id="NA_">NA</td>
+            <td class="goal" id="SA_">SA</td>
+            <td class="goal" id="AN_">AN</td>
+            <td class="goal" id="OC_">OC</td>
+            <td class="goal" id="AF_">AF</td>
+        </table>
     </footer>
-
 </div>
- <div id="player-modal">
+
+<div id="username" class="hide">
+    <form id="user-form">
+        <input type="text" placeholder="username" required>
+        <input type="submit" value="save" id="submit">
+    </form>
+</div>
+
+<div id="player-modal">
         <form id="player-form">
             <input id="player-input" type="text" placeholder="Player name" required>
             <input type="submit" value="Start game">
@@ -84,3 +64,6 @@
     </div>
 </body>
 </html>
+
+
+
