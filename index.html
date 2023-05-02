@@ -21,66 +21,45 @@
 
 </head>
 <body>
-
 <div class="container">
-    <header id="header">
-        <nav id="nav">
-            <h1 id="title">21</h1>
-            <h4 id="player-name"></h4>
-            <a title="home" href="main.html">HOME</a>
-            <a title="map" href="map.html">MAP</a>
-            <select id="options">
-                <option value="choose">OPTIONS</option>
-                <option value="instructions">instructions</option>
-                <option value="change_name">change username</option>
-                <option value="save">save</option>
-                <option value="stop">stop playing</option>
-            </select>
+    <header class="header">
+        <h1>21</h1>
+        <nav>
+            <ul class="flex-wrap space-evenly">
+                <li>
+                    <a class="button nav-button" title="about" href="about.html">ABOUT</a>
+                </li>
+                <li>
+                    <a class="button nav-button" title="start" href="start.html">START</a>
+                </li>
+            </ul>
         </nav>
     </header>
 
-
     <main>
-        <section id="map">
-            <div id="map"> </div>
-        </section>
-        <!--<section id="right">
-            <article>
-                <p id="text">pelin teksti tähän :D</p>
-            </article>
-        </section>-->
+        <div id="game-text"></div>
+        <div id="map"></div>
     </main>
 
-    <footer>
-        <figure id="AS_" title="AS">
-            <figcaption>asia</figcaption>
-        </figure>
-        <figure id="EU_" title="EU">
-            <figcaption>europe</figcaption>
-        </figure>
-        <figure id="NA_" title="NA">
-            <figcaption>north<br>america</figcaption>
-        </figure>
-        <figure id="SA_" title="SA">
-            <figcaption>south<br>america</figcaption>
-        </figure>
-        <figure id="AN_" title="AN">
-            <figcaption>antarctica</figcaption>
-        </figure>
-        <figure id="OC_" title="OC">
-            <figcaption>australia</figcaption>
-        </figure>
-        <figure id="AF_" title="AF">
-            <figcaption>africa</figcaption>
-        </figure>
+    <footer class="footer">
+        <table class="space-evenly">
+            <td class="goal" id="AS">AS</td>
+            <td class="goal" id="EU">EU</td>
+            <td class="goal" id="NA">NA</td>
+            <td class="goal" id="SA">SA</td>
+            <td class="goal" id="AN">AN</td>
+            <td class="goal" id="OC">OC</td>
+            <td class="goal" id="AF">AF</td>
+        </table>
     </footer>
-
 </div>
- <div id="player-modal">
-        <form id="player-form">
-            <input id="player-input" type="text" placeholder="Player name" required>
-            <input type="submit" value="Start game">
-        </form>
-    </div>
+
+<div id="username" class="hide">
+    <form id="user-form">
+        <input type="text" placeholder="username" required>
+        <input type="submit" value="save" id="submit">
+    </form>
+</div>
+
 </body>
 </html>
